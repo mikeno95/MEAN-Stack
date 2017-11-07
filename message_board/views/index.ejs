@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Message Board</title>
+	<style type="text/css">
+		* {
+			margin: 0px;
+			padding: 0px;
+			font-family: helvetica;
+		}
+		body {
+			padding: 20px;
+			width: 800px;
+		}
+		h2 {
+			margin: 10px 0px;
+		}
+		#message {
+			width: 100px;
+			padding: 30px;
+		}
+		#messages {
+			width: 100px;
+			padding: 10px;
+		}
+		#message textarea {
+			width: 600px;
+			height: 100px;
+		}
+		h5 {
+			width: 600px;
+			margin: 10px 0px;
+			font-size: 16px;
+		}
+		#comment, #comments {
+			width: 400px;
+			font-size: 12px;
+			padding: 0px 20px;
+			margin-left: 20px;
+		}
+		#comment textarea {
+			width: 500px;
+		}
+		input, textarea {
+			display: block;
+		}
+		#error {
+			color: red;
+		}
+		#errors {
+			padding-top: 10px;
+		}
+		#comment {
+			margin-top: 20px;
+		}
+		#comments {
+			margin: 5px 0px;
+			border: 1px solid gray;
+		}
+	</style>
+</head>
+<body>
+	<h2>The Dojo Message Board</h2>
+	<hr>
+	<div id='errors'>
+		<% if(typeof(errors)!=='undefined'){%>
+			<% for (var x in errors) {%>
+				<p id="error"><%= errors[x] %></p>
+			<%}%>
+		<%}%>
+	</div>
+	<div id='message'>
+		<form action="/message/create" method='POST'>
+			<label for='name'>Name: </label>
+			<input type="text" name="name"><br><br>
+			<label for='message'>Message: </label>
+			<textarea name='message'></textarea><br>
+			<input type="submit" name="submit" value="Post Message">
+		</form>
+	</div>
+	<hr>
+	<% for (var message of messages) {%>
+		<div id='messages'>
+			<h5>Name: <%= message.name %></h5>
+			<h5>Message: "<%= message.message %>"</h5>
+		</div>
+		<% for (var comment of message._comments) {%>
+			<div id='comments'>
+				<p>Name: <%= comment.name %></p>
+				<p>Comment: <%= comment.comment %></p>
+			</div>
+		<%}%>
+		<div id='comment'>
+			<h3>Add Comment:</h3>
+			<form action='/comment/<%= message._id %>' method='POST'>
+				<label for='name'>Name: </label>
+				<input type="text" name="name"><br>
+				<label for='comment'>Comment: </label>
+				<textarea name='comment'></textarea><br>
+				<input type="submit" name="submit" value="Post Comment"><br>
+			</form>
+		</div>
+		<hr>
+	<%}%>
+	
+
+
+</body>
+</html>

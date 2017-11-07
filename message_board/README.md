@@ -1,0 +1,2 @@
+# Message Board Assignment
+The purpose of this assignment was to create a simple, single paged message board that allows users to create message, and comment on those existing messages. Create two models (one for messages and one for comments), and relate the two (one-to-many).

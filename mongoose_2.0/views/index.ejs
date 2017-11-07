@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	<style type="text/css">
+		* {
+			margin: 0px;
+			padding: 0px;
+			font-family: helvetica;
+		}
+		body {
+			padding: 20px;
+		}
+		table {
+			margin-top: 10px;
+		}
+		button {
+			padding: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h2>Cat Dashboard</h2>
+	<hr>
+	<a href="/cat/new"><button>Add New Cat</button></a><br><br>
+	<h3>Fellow Cats:</h3>
+	<table>
+		<% for (cat of cats) { %>
+			<tr>
+				<td><a href="/cat/<%= cat.id %>"><%= cat.name%></a></td>
+			</tr>
+		<%}%>
+	</table>
+</body>
+</html>
